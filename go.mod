@@ -1,3 +1,3 @@
-module github.com/madokast/slicekey
+module github.com/demoslau/slicekey
 
 go 1.19

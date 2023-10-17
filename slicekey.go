@@ -6,7 +6,7 @@ import (
 )
 
 type Slice[E any] struct {
-	data any // array obj
+	Data any // array obj
 }
 
 // create a slicekey from elements
@@ -22,7 +22,7 @@ func Of[E any](elements ...E) Slice[E] {
 		arrEleObj.Set(reflect.ValueOf(e))
 	}
 
-	return Slice[E]{data: arrObj.Interface()}
+	return Slice[E]{Data: arrObj.Interface()}
 }
 
 // create a slicekey from slice
@@ -32,12 +32,12 @@ func Create[E any](es []E) Slice[E] {
 
 // the length of the slicekey
 func (s *Slice[E]) Len() int {
-	arrObj := reflect.ValueOf(s.data)
+	arrObj := reflect.ValueOf(s.Data)
 	return arrObj.Len()
 }
 
 func (s *Slice[E]) Get(index int) E {
-	arrObj := reflect.ValueOf(s.data)
+	arrObj := reflect.ValueOf(s.Data)
 	obj := arrObj.Index(index)
 	return obj.Interface().(E)
 }
@@ -46,7 +46,7 @@ func (s *Slice[E]) Get(index int) E {
 func (s *Slice[E]) Slice() []E {
 	es := make([]E, s.Len())
 	esObj := reflect.ValueOf(es)
-	arrObj := reflect.ValueOf(s.data)
+	arrObj := reflect.ValueOf(s.Data)
 	for i := 0; i < s.Len(); i++ {
 		esObj.Index(i).Set(arrObj.Index(i))
 	}
